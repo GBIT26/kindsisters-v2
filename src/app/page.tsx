@@ -1,65 +1,284 @@
-import Image from "next/image";
+import Image from 'next/image';
+import SectionReveal from '@/components/SectionReveal';
+import DonateButton from '@/components/DonateButton';
+import ImpactCounter from '@/components/ImpactCounter';
+import RotatingImpact from '@/components/RotatingImpact';
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+    <>
+      {/* ===== HERO ===== */}
+      <section className="relative min-h-[90vh] flex items-end overflow-hidden">
         <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
+          src="/images/hero/women-cafe.jpg"
+          alt="Kind Sisters community members sharing a warm moment together"
+          fill
+          className="object-cover"
           priority
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        <div className="absolute inset-0 bg-gradient-to-t from-[var(--trust)]/90 via-[var(--trust)]/40 to-transparent" />
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-24 w-full">
+          <div className="max-w-2xl">
+            <h1 className="font-[var(--font-dm-serif)] text-4xl md:text-6xl lg:text-7xl text-white leading-tight mb-6">
+              Creating space<br />for community.
+            </h1>
+            <p className="text-white/80 text-lg md:text-xl max-w-lg mb-8">
+              A grass-roots nonprofit supporting vulnerable women and children in Perth through essential relief and genuine connection.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <DonateButton size="lg" variant="primary" />
+              <DonateButton size="lg" variant="outline" href="/projects" className="border-white text-white hover:bg-white hover:text-[var(--trust)]">
+                Our Programs
+              </DonateButton>
+            </div>
+          </div>
+
+          {/* Impact Stats */}
+          <div className="grid grid-cols-3 gap-4 mt-12 max-w-xl">
+            {[
+              { value: '500+', label: 'Families Supported' },
+              { value: '40+', label: 'Schools Reached' },
+              { value: '1,000+', label: 'Relief Bags Delivered' },
+            ].map((stat) => (
+              <div key={stat.label} className="bg-white/10 backdrop-blur-sm rounded-xl px-4 py-3 text-center border border-white/10">
+                <p className="text-2xl md:text-3xl font-bold text-white">{stat.value}</p>
+                <p className="text-xs text-white/60 mt-1">{stat.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+      </section>
+
+      {/* ===== WHY WE EXIST ===== */}
+      <section className="py-20 md:py-28 blend-to-warmth">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionReveal>
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <p className="text-[var(--kindness)] font-semibold text-sm tracking-wider uppercase mb-4">Why we exist</p>
+                <h2 className="font-[var(--font-dm-serif)] text-3xl md:text-4xl lg:text-5xl text-[var(--trust)] leading-tight mb-6">
+                  Tonight, a mum in Perth will skip dinner so her kids can eat.
+                </h2>
+                <p className="text-[var(--trust-soft)] text-lg leading-relaxed mb-4">
+                  She arrived in Australia fleeing violence. She doesn&apos;t have toothpaste. Her children go to school without breakfast. She&apos;s too proud to ask for help — and too exhausted to know where to find it.
+                </p>
+                <p className="text-[var(--trust-soft)] text-lg leading-relaxed mb-6">
+                  <strong className="text-[var(--trust)]">She&apos;s not a statistic. She&apos;s your neighbour.</strong> And right now, there are hundreds of women just like her across the City of Stirling and surrounding suburbs.
+                </p>
+                <div className="bg-[var(--kindness-whisper)] rounded-xl p-6 border-l-4 border-[var(--kindness)]">
+                  <p className="text-[var(--trust)] font-medium italic text-lg">
+                    &ldquo;It was the first time in months I felt like someone truly cared.&rdquo;
+                  </p>
+                  <p className="text-[var(--kindness)] text-sm mt-2 font-semibold">— Sarah, mother of three</p>
+                </div>
+              </div>
+              <div className="relative">
+                <Image
+                  src="/images/hero/mother-daughter-asian.jpg"
+                  alt="A daughter hugging her mother — the kind of moment your donation protects"
+                  width={600}
+                  height={450}
+                  className="rounded-2xl shadow-[var(--shadow-lg)] object-cover w-full"
+                />
+                <div className="absolute -bottom-4 -left-4 bg-[var(--warmth)] text-white rounded-xl px-5 py-3 shadow-[var(--shadow-md)]">
+                  <p className="text-2xl font-bold">Since 2015</p>
+                  <p className="text-xs opacity-80">Serving our community</p>
+                </div>
+              </div>
+            </div>
+          </SectionReveal>
         </div>
-      </main>
-    </div>
+      </section>
+
+      {/* ===== WHAT WE DO ===== */}
+      <section className="py-20 md:py-28 blend-warmth-to-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionReveal>
+            <div className="text-center mb-12">
+              <p className="text-[var(--warmth)] font-semibold text-sm tracking-wider uppercase mb-4">What we do</p>
+              <h2 className="font-[var(--font-dm-serif)] text-3xl md:text-4xl text-[var(--trust)]">
+                Two programs. Real impact.
+              </h2>
+            </div>
+          </SectionReveal>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            <SectionReveal delay={0.1}>
+              <a href="/projects/essentials-relief-bags" className="group block bg-white rounded-2xl overflow-hidden shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all hover:-translate-y-1">
+                <div className="relative h-64 overflow-hidden">
+                  <Image src="/images/gallery/img_2446.jpg" alt="Essentials Relief Bags program" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--kindness)]/80 to-transparent" />
+                  <h3 className="absolute bottom-4 left-6 text-white text-2xl font-[var(--font-dm-serif)]">Essentials Relief Bags</h3>
+                </div>
+                <div className="p-6">
+                  <p className="text-[var(--trust-soft)] leading-relaxed">Food and hygiene essentials delivered directly to families in need through local schools — discreetly, respectfully, and with care.</p>
+                </div>
+              </a>
+            </SectionReveal>
+
+            <SectionReveal delay={0.2}>
+              <a href="/projects/womens-community-connect" className="group block bg-white rounded-2xl overflow-hidden shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)] transition-all hover:-translate-y-1">
+                <div className="relative h-64 overflow-hidden">
+                  <Image src="/images/hero/women-multicultural.jpg" alt="Women's Community Connect Events" fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[var(--warmth)]/80 to-transparent" />
+                  <h3 className="absolute bottom-4 left-6 text-white text-2xl font-[var(--font-dm-serif)]">Women&apos;s Community Connect</h3>
+                </div>
+                <div className="p-6">
+                  <p className="text-[var(--trust-soft)] leading-relaxed">Safe, inclusive events where women build connections, access support services, and develop confidence through community.</p>
+                </div>
+              </a>
+            </SectionReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== IMPACT COUNTERS ===== */}
+      <section className="py-20 blend-to-pink">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionReveal>
+            <div className="text-center mb-12">
+              <h2 className="font-[var(--font-dm-serif)] text-3xl md:text-4xl text-[var(--trust)]">Our Impact</h2>
+            </div>
+            <ImpactCounter />
+          </SectionReveal>
+        </div>
+      </section>
+
+      {/* ===== STORIES OF HOPE ===== */}
+      <section className="pt-20 md:pt-28 pb-10 md:pb-14 blend-pink-to-cream">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionReveal>
+            <div className="text-center mb-12">
+              <p className="text-[var(--kindness)] font-semibold text-sm tracking-wider uppercase mb-4">Testimonials</p>
+              <h2 className="font-[var(--font-dm-serif)] text-3xl md:text-4xl text-[var(--trust)]">Stories of Hope</h2>
+            </div>
+          </SectionReveal>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { quote: "When my family first arrived in Perth, we had nothing. Kind Sisters provided us with essentials relief bags filled with food and hygiene products. It was the first time in months I felt like someone truly cared.", name: "Sarah M." },
+              { quote: "I started volunteering after attending a Community Connect event. The warmth I experienced was unlike anything. Now I help pack relief bags every month and it has given me real purpose.", name: "Lisa T." },
+              { quote: "As a school support worker, I see the impact every week. Families who were struggling now receive bags delivered with dignity. The children come to school ready to learn.", name: "Rachel K." },
+            ].map((testimonial, i) => (
+              <SectionReveal key={testimonial.name} delay={i * 0.1}>
+                <div className="bg-white rounded-2xl p-8 shadow-[var(--shadow-sm)] border-l-4 border-[var(--kindness)] h-full flex flex-col">
+                  <p className="text-[var(--trust-soft)] leading-relaxed flex-1 italic">&ldquo;{testimonial.quote}&rdquo;</p>
+                  <p className="mt-4 font-semibold text-[var(--kindness)]">{testimonial.name}</p>
+                </div>
+              </SectionReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== ROTATING IMPACT STATEMENT ===== */}
+      <section className="py-6 md:py-8 bg-[var(--earth)]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <RotatingImpact />
+        </div>
+      </section>
+
+      {/* ===== DONATE CTA ===== */}
+      <section className="py-20 md:py-28 bg-[var(--kindness)]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <SectionReveal>
+            <h2 className="font-[var(--font-dm-serif)] text-3xl md:text-5xl text-white mb-6">
+              You can change a family&apos;s week tonight.
+            </h2>
+            <p className="text-white/80 text-lg mb-10 max-w-2xl mx-auto">
+              While you&apos;re reading this, a volunteer is packing a bag with rice, pasta, soap, and toothpaste for a family who has none. Your donation puts that bag in their hands. Every dollar goes direct. Tax deductible.
+            </p>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-10">
+              {[
+                { amount: '$10', impact: 'A child goes to school with a full belly and a toothbrush' },
+                { amount: '$25', impact: 'A mum can wash her children\'s clothes and cook them dinner' },
+                { amount: '$50', impact: 'A whole family receives a bag of essentials delivered with dignity' },
+              ].map((item) => (
+                <div key={item.amount} className="bg-white/15 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <p className="text-3xl font-bold text-white mb-2">{item.amount}</p>
+                  <p className="text-white/70 text-sm">{item.impact}</p>
+                </div>
+              ))}
+            </div>
+
+            <DonateButton size="lg" variant="white" />
+
+            <p className="mt-6 text-white/50 text-sm">
+              Containers for Change ID: C11083530
+            </p>
+          </SectionReveal>
+        </div>
+      </section>
+
+      {/* ===== SPONSORS CAROUSEL ===== */}
+      <section className="py-12 bg-[var(--earth)] overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-[var(--trust-muted)] font-semibold text-sm tracking-wider uppercase mb-8 text-center">Our Supporters</p>
+          <div className="relative">
+            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[var(--earth)] to-transparent z-10" />
+            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[var(--earth)] to-transparent z-10" />
+            <div className="flex animate-scroll-x w-max">
+              {[...Array(3)].map((_, setIndex) => (
+                <div key={setIndex} className="flex shrink-0 items-center gap-16 px-8" aria-hidden={setIndex > 0}>
+                  {[
+                    { name: 'GBIT Automation', logo: '/images/partners/gbit-logo.png', url: 'https://gbit.au' },
+                    { name: 'Sisters of Charity Inc', logo: '/images/partners/sisters-of-charity-logo.jpg', url: 'https://www.sistersofcharity.org.au' },
+                    { name: 'Street Smart Australia', logo: '/images/partners/street-smart-logo.jpg', url: 'https://streetsmartaustralia.org' },
+                    { name: 'Relate Counselling', logo: '/images/partners/relate-counselling-logo.png', url: 'https://www.relatecounselling.com.au' },
+                    { name: 'SJM Bookkeeping Pty Ltd', logo: null, url: null },
+                    { name: 'Inner Wheel Society Scarborough', logo: null, url: 'https://www.innerwheel.org.au' },
+                    { name: 'Mens Shed Wanneroo', logo: null, url: 'https://mensshed.org/shed/mens-shed-wanneroo' },
+                    { name: 'Sudbury Community House', logo: null, url: null },
+                  ].map((sponsor) => (
+                    <div key={`${setIndex}-${sponsor.name}`} className="flex-shrink-0">
+                      {sponsor.url ? (
+                        <a href={sponsor.url} target="_blank" rel="noopener noreferrer" title={sponsor.name}>
+                          {sponsor.logo ? (
+                            <img src={sponsor.logo} alt={sponsor.name} className="h-16 w-auto object-contain" />
+                          ) : (
+                            <span className="text-[var(--trust-soft)] text-base font-semibold whitespace-nowrap hover:text-[var(--kindness)] transition-colors">{sponsor.name}</span>
+                          )}
+                        </a>
+                      ) : (
+                        sponsor.logo ? (
+                          <img src={sponsor.logo} alt={sponsor.name} className="h-16 w-auto object-contain" />
+                        ) : (
+                          <span className="text-[var(--trust-soft)] text-base font-semibold whitespace-nowrap">{sponsor.name}</span>
+                        )
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== NEWSLETTER ===== */}
+      <section className="py-20 blend-cream-to-white">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <SectionReveal>
+            <h2 className="font-[var(--font-dm-serif)] text-3xl text-[var(--trust)] mb-3">Stay Connected</h2>
+            <p className="text-[var(--trust-soft)] mb-8">Join our newsletter to hear about our impact and how you can help.</p>
+            <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
+              <input
+                type="email"
+                placeholder="Your email address"
+                required
+                className="flex-1 px-4 py-3 rounded-full border border-[var(--border-default)] bg-[var(--earth)] focus:border-[var(--kindness)] focus:outline-none focus:ring-2 focus:ring-[var(--kindness)]/20 transition-all text-sm"
+              />
+              <button
+                type="submit"
+                className="px-6 py-3 bg-[var(--kindness)] text-white rounded-full font-semibold hover:bg-[var(--kindness-deep)] transition-all text-sm"
+              >
+                Subscribe
+              </button>
+            </form>
+          </SectionReveal>
+        </div>
+      </section>
+    </>
   );
 }

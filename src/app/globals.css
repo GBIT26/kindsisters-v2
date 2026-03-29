@@ -1,26 +1,202 @@
 @import "tailwindcss";
 
+/* ---- Kind Sisters V2 Design Tokens ---- */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Brand — Gentle rose, not vibrant hot pink */
+  --kindness: #E8709A;
+  --kindness-deep: #C45B7F;
+  --kindness-whisper: #FDF2F6;
+  --kindness-soft: #F5D5E0;
+
+  /* Warmth — Earthy terracotta, not bright orange */
+  --warmth: #D4915E;
+  --warmth-deep: #B87A4A;
+  --warmth-glow: #FFF8F0;
+
+  /* Earth — Warm cream canvas */
+  --earth: #FAF7F2;
+  --canvas: #FFFFFF;
+
+  /* Trust — Sophisticated dark slate */
+  --trust: #2C3E50;
+  --trust-soft: #4A6274;
+  --trust-muted: #8899A6;
+
+  /* Relief — Muted sage green */
+  --relief: #5B9A6F;
+  --relief-soft: #E8F5EC;
+
+  /* Surfaces */
+  --surface-primary: var(--earth);
+  --surface-card: var(--canvas);
+  --surface-elevated: #FFFFFF;
+
+  /* Text */
+  --text-primary: var(--trust);
+  --text-secondary: var(--trust-soft);
+  --text-muted: var(--trust-muted);
+
+  /* Borders */
+  --border-subtle: rgba(44, 62, 80, 0.08);
+  --border-default: rgba(44, 62, 80, 0.12);
+
+  /* Typography */
+  --font-heading: 'DM Serif Display', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-accent: 'La Belle Aurore', cursive;
+
+  /* Spacing scale (8px base) */
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-2xl: 48px;
+  --space-3xl: 64px;
+  --space-4xl: 96px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 9999px;
+
+  /* Shadows — subtle single shadow strategy */
+  --shadow-sm: 0 1px 3px rgba(44, 62, 80, 0.06);
+  --shadow-md: 0 4px 12px rgba(44, 62, 80, 0.08);
+  --shadow-lg: 0 8px 24px rgba(44, 62, 80, 0.1);
+  --shadow-glow: 0 4px 20px rgba(232, 112, 154, 0.15);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-kindness: var(--kindness);
+  --color-kindness-deep: var(--kindness-deep);
+  --color-kindness-whisper: var(--kindness-whisper);
+  --color-kindness-soft: var(--kindness-soft);
+  --color-warmth: var(--warmth);
+  --color-warmth-deep: var(--warmth-deep);
+  --color-warmth-glow: var(--warmth-glow);
+  --color-earth: var(--earth);
+  --color-canvas: var(--canvas);
+  --color-trust: var(--trust);
+  --color-trust-soft: var(--trust-soft);
+  --color-trust-muted: var(--trust-muted);
+  --color-relief: var(--relief);
+  --color-relief-soft: var(--relief-soft);
+  --color-background: var(--earth);
+  --color-foreground: var(--trust);
+  --font-sans: var(--font-body);
+  --font-serif: var(--font-heading);
+  --font-accent: var(--font-accent);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ---- Global ---- */
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  background-color: var(--earth);
+  color: var(--trust);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---- Typography System ---- */
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+/* ---- Focus & Accessibility ---- */
+*:focus-visible {
+  outline: 3px solid var(--kindness);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--kindness);
+  color: white;
+  padding: 8px 16px;
+  z-index: 99999;
+  font-weight: 600;
+  border-radius: 0 0 var(--radius-sm) 0;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* ---- Reduced Motion ---- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---- Animations ---- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes scroll-x {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-100% / 3)); }
+}
+
+.animate-scroll-x {
+  animation: scroll-x 30s linear infinite;
+}
+
+.animate-scroll-x:hover {
+  animation-play-state: paused;
+}
+
+/* ---- Section Blending ---- */
+/* Smooth gradient transitions between sections to eliminate hard lines */
+.blend-to-pink {
+  background: linear-gradient(to bottom, var(--earth), var(--kindness-whisper));
+}
+
+.blend-to-cream {
+  background: linear-gradient(to bottom, var(--kindness-whisper), var(--earth));
+}
+
+.blend-to-warmth {
+  background: linear-gradient(to bottom, var(--earth), var(--warmth-glow));
+}
+
+.blend-warmth-to-cream {
+  background: linear-gradient(to bottom, var(--warmth-glow), var(--earth));
+}
+
+.blend-pink-to-cream {
+  background: linear-gradient(to bottom, var(--kindness-whisper), var(--earth));
+}
+
+.blend-cream-to-white {
+  background: linear-gradient(to bottom, var(--earth), var(--canvas));
+}
+
+.blend-white-to-cream {
+  background: linear-gradient(to bottom, var(--canvas), var(--earth));
+}
+
+/* ---- Selection ---- */
+::selection {
+  background: var(--kindness-soft);
+  color: var(--trust);
 }
