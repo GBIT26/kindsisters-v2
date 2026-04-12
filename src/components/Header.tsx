@@ -34,27 +34,50 @@ export default function Header() {
   return (
     <>
       <header
-        className={`sticky top-0 z-50 transition-all duration-300 ${
+        className={`sticky top-0 z-50 transition-all duration-500 ${
           scrolled
             ? 'bg-white/95 backdrop-blur-md shadow-[var(--shadow-sm)]'
             : 'bg-white'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Expanded state: Logo centred with Donate button */}
+          <div
+            className="transition-all duration-500 overflow-hidden"
+            style={{
+              maxHeight: scrolled ? '0px' : '16rem',
+              opacity: scrolled ? 0 : 1,
+            }}
+          >
+            <div className="flex items-center justify-between py-8">
+              <Link href="/">
+                <Image
+                  src="/images/kind-sisters-logo.svg"
+                  alt="Kind Sisters — Creating Space for Community"
+                  width={720}
+                  height={320}
+                  className="w-auto transition-all duration-500"
+                  style={{ height: '12rem' }}
+                  priority
+                />
+              </Link>
+              <DonateButton size="lg" />
+            </div>
+          </div>
+
+          {/* Compact state: Logo left, nav + donate right */}
           <div
             className="flex items-center justify-between transition-all duration-500"
-            style={{ height: scrolled ? '5rem' : '16rem' }}
+            style={{ height: scrolled ? '5rem' : '0px', opacity: scrolled ? 1 : 0, overflow: 'hidden' }}
           >
-            {/* Logo */}
+            {/* Compact Logo */}
             <Link href="/" className="flex-shrink-0">
               <Image
                 src="/images/kind-sisters-logo.svg"
                 alt="Kind Sisters — Creating Space for Community"
-                width={720}
-                height={320}
-                className="w-auto transition-all duration-500"
-                style={{ height: scrolled ? '3.5rem' : '14rem' }}
-                priority
+                width={180}
+                height={80}
+                className="h-14 w-auto"
               />
             </Link>
 
