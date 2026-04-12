@@ -23,7 +23,7 @@ const team = [
 
 export default function AboutPage() {
   return (
-    <main className="bg-earth">
+    <div className="bg-earth">
       {/* Hero */}
       <section className="py-16 md:py-24 bg-kindness-whisper">
         <div className="mx-auto max-w-5xl px-6 text-center">
@@ -106,6 +106,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

@@ -6,9 +6,15 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import DonateButton from './DonateButton';
 
+const projectLinks = [
+  { href: '/projects/essentials-relief-bags', label: 'Essentials Relief Bags' },
+  { href: '/projects/womens-community-connect', label: "Women's Community Connect" },
+];
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [projectsOpen, setProjectsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -16,12 +22,13 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-
   const navLinks = [
     { href: '/about', label: 'About' },
-    { href: '/projects', label: 'Projects' },
+    { href: '/projects', label: 'Projects', hasDropdown: true },
+    { href: '/events', label: 'Events' },
+    { href: '/get-involved', label: 'Get Involved' },
+    { href: '/stories', label: 'Stories' },
     { href: '/contact', label: 'Contact' },
-    { href: '/testimonials', label: 'Stories' },
   ];
 
   return (
@@ -48,16 +55,65 @@ export default function Header() {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden md:flex items-center gap-8">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-[var(--trust)] font-medium hover:text-[var(--kindness)] transition-colors text-sm tracking-wide"
-                >
-                  {link.label}
-                </Link>
-              ))}
+            <nav className="hidden md:flex items-center gap-6">
+              {navLinks.map((link) =>
+                link.hasDropdown ? (
+                  <div
+                    key={link.href}
+                    className="relative"
+                    onMouseEnter={() => setProjectsOpen(true)}
+                    onMouseLeave={() => setProjectsOpen(false)}
+                  >
+                    <Link
+                      href={link.href}
+                      className="text-[var(--trust)] font-medium hover:text-[var(--kindness)] transition-colors text-sm tracking-wide inline-flex items-center gap-1"
+                    >
+                      {link.label}
+                      <svg className={`w-3.5 h-3.5 transition-transform ${projectsOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </Link>
+                    <AnimatePresence>
+                      {projectsOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 4 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 4 }}
+                          transition={{ duration: 0.15 }}
+                          className="absolute left-0 top-full pt-2"
+                        >
+                          <div className="bg-white rounded-[var(--radius-md)] shadow-[var(--shadow-md)] border border-[var(--border-subtle)] py-2 min-w-[220px]">
+                            <Link
+                              href="/projects"
+                              className="block px-4 py-2 text-sm text-[var(--trust)] hover:bg-[var(--kindness-whisper)] hover:text-[var(--kindness-deep)] transition-colors font-medium"
+                            >
+                              All Programs
+                            </Link>
+                            <div className="border-t border-[var(--border-subtle)] my-1" />
+                            {projectLinks.map((sub) => (
+                              <Link
+                                key={sub.href}
+                                href={sub.href}
+                                className="block px-4 py-2 text-sm text-[var(--trust-soft)] hover:bg-[var(--kindness-whisper)] hover:text-[var(--kindness-deep)] transition-colors"
+                              >
+                                {sub.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                ) : (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="text-[var(--trust)] font-medium hover:text-[var(--kindness)] transition-colors text-sm tracking-wide"
+                  >
+                    {link.label}
+                  </Link>
+                )
+              )}
               <DonateButton size="sm" />
             </nav>
 
@@ -89,18 +145,33 @@ export default function Header() {
               transition={{ duration: 0.3 }}
               className="md:hidden overflow-hidden bg-white border-t border-[var(--border-subtle)]"
             >
-              <div className="px-4 py-4 space-y-3">
+              <div className="px-4 py-4 space-y-1">
                 {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setIsOpen(false)}
-                    className="block text-[var(--trust)] font-medium py-2 hover:text-[var(--kindness)] transition-colors"
-                  >
-                    {link.label}
-                  </Link>
+                  <div key={link.href}>
+                    <Link
+                      href={link.href}
+                      onClick={() => { setIsOpen(false); setProjectsOpen(false); }}
+                      className="block text-[var(--trust)] font-medium py-2 hover:text-[var(--kindness)] transition-colors"
+                    >
+                      {link.label}
+                    </Link>
+                    {link.hasDropdown && (
+                      <div className="pl-4 space-y-1">
+                        {projectLinks.map((sub) => (
+                          <Link
+                            key={sub.href}
+                            href={sub.href}
+                            onClick={() => setIsOpen(false)}
+                            className="block text-[var(--trust-soft)] text-sm py-1.5 hover:text-[var(--kindness)] transition-colors"
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
-                <DonateButton size="md" className="w-full text-center mt-2" />
+                <DonateButton size="md" className="w-full text-center mt-3" />
               </div>
             </motion.div>
           )}

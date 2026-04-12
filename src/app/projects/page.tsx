@@ -70,7 +70,7 @@ export default function ProjectsPage() {
   };
 
   return (
-    <main className="bg-earth">
+    <div className="bg-earth">
       {/* Hero */}
       <section className="py-16 md:py-24 bg-kindness-whisper">
         <div className="mx-auto max-w-5xl px-6 text-center">
@@ -280,6 +280,6 @@ export default function ProjectsPage() {
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

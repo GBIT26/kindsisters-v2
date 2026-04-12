@@ -26,12 +26,12 @@ const hygieneGoods = [
 
 export default function EssentialsReliefBagsPage() {
   return (
-    <main className="bg-earth">
+    <div className="bg-earth">
       {/* Hero */}
       <section className="relative">
         <div className="relative h-[50vh] min-h-[400px]">
           <Image
-            src="/images/gallery/essentials-bags.jpg"
+            src="/images/gallery/bags-ready-for-delivery.jpeg"
             alt="Essentials Relief Bags being prepared by volunteers"
             fill
             className="object-cover"
@@ -154,6 +154,6 @@ export default function EssentialsReliefBagsPage() {
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

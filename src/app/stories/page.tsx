@@ -29,7 +29,7 @@ const testimonials = [
 
 export default function TestimonialsPage() {
   return (
-    <main className="bg-earth">
+    <div className="bg-earth">
       {/* Hero */}
       <section className="py-16 md:py-24 bg-kindness-whisper">
         <div className="mx-auto max-w-5xl px-6 text-center">
@@ -94,14 +94,14 @@ export default function TestimonialsPage() {
               Donate Now
             </Link>
             <Link
-              href="/contact"
+              href="/get-involved"
               className="inline-block rounded-[var(--radius-full)] border-2 border-trust px-10 py-4 text-lg font-semibold text-trust hover:bg-trust hover:text-white transition-colors"
             >
-              Volunteer
+              Get Involved
             </Link>
           </div>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

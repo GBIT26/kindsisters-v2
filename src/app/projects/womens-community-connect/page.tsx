@@ -31,12 +31,12 @@ const serviceAreas = [
 
 export default function WomensCommunityConnectPage() {
   return (
-    <main className="bg-earth">
+    <div className="bg-earth">
       {/* Hero */}
       <section className="relative">
         <div className="relative h-[50vh] min-h-[400px]">
           <Image
-            src="/images/gallery/womens-connect.jpg"
+            src="/images/hero/women-multicultural.jpg"
             alt="Women gathering at a Kind Sisters Community Connect event"
             fill
             className="object-cover"
@@ -127,6 +127,6 @@ export default function WomensCommunityConnectPage() {
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

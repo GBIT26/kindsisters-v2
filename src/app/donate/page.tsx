@@ -1,26 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
-
-const STRIPE_CONFIG = {
-  publishableKey: "REPLACE_WITH_STRIPE_PUBLISHABLE_KEY",
-  priceIds: {
-    once: {
-      10: "REPLACE_WITH_PRICE_ID",
-      25: "REPLACE_WITH_PRICE_ID",
-      50: "REPLACE_WITH_PRICE_ID",
-    },
-    monthly: {
-      10: "REPLACE_WITH_PRICE_ID",
-      25: "REPLACE_WITH_PRICE_ID",
-      50: "REPLACE_WITH_PRICE_ID",
-    },
-  },
-  successUrl: "/donate?status=success",
-  cancelUrl: "/donate?status=cancel",
-  fallbackUrl: "https://buy.stripe.com/5kAaFXcdCgxOcLuaEE",
-};
+import EmbeddedCheckoutForm from "@/components/EmbeddedCheckout";
 
 const impactItems = [
   { amount: 10, label: "School supplies for one child" },
@@ -35,41 +17,48 @@ export default function DonatePage() {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(25);
   const [customAmount, setCustomAmount] = useState("");
   const [status, setStatus] = useState<string | null>(null);
+  const [showCheckout, setShowCheckout] = useState(false);
 
-  // Check URL params for post-donation status
-  if (typeof window !== "undefined" && status === null) {
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const urlStatus = params.get("status");
     if (urlStatus) {
       setStatus(urlStatus);
     }
-  }
-
-  const handleDonate = () => {
-    // When Stripe is configured, this would create a Checkout session.
-    // For now, redirect to the existing Stripe link.
-    window.open(STRIPE_CONFIG.fallbackUrl, "_blank", "noopener,noreferrer");
-  };
+  }, []);
 
   const activeAmount = selectedAmount ?? (customAmount ? Number(customAmount) : 0);
 
+  const handleDonate = () => {
+    if (activeAmount > 0) {
+      setShowCheckout(true);
+    }
+  };
+
   return (
-    <main className="bg-earth">
+    <div className="bg-earth">
+      {/* Embedded Stripe Checkout */}
+      {showCheckout && activeAmount > 0 && (
+        <EmbeddedCheckoutForm
+          amount={activeAmount}
+          frequency={frequency}
+          onClose={() => setShowCheckout(false)}
+        />
+      )}
+
       {/* Post-donation status */}
       {status === "success" && (
-        <div className="bg-relief-soft border-b border-relief/20 py-4 text-center">
-          <p className="text-relief font-medium text-lg">
-            Thank you for your generous donation! Your kindness makes a real
-            difference.
-          </p>
-        </div>
-      )}
-      {status === "cancel" && (
-        <div className="bg-warmth-glow border-b border-warmth/20 py-4 text-center">
-          <p className="text-warmth-deep font-medium">
-            Your donation was not completed. If you&apos;d like to try again,
-            you can use the form below.
-          </p>
+        <div className="bg-relief-soft border-b border-relief/20 py-6 text-center">
+          <div className="mx-auto max-w-2xl px-6">
+            <p className="text-4xl mb-3">💛</p>
+            <p className="text-relief font-medium text-xl mb-2">
+              Thank you for your generous donation!
+            </p>
+            <p className="text-trust-soft">
+              Your kindness makes a real difference to families in our community.
+              You&apos;ll receive a tax-deductible receipt by email.
+            </p>
+          </div>
         </div>
       )}
 
@@ -170,6 +159,7 @@ export default function DonatePage() {
               <input
                 type="number"
                 min="1"
+                max="50000"
                 placeholder="Other amount"
                 value={customAmount}
                 onChange={(e) => {
@@ -191,10 +181,12 @@ export default function DonatePage() {
             {frequency === "monthly" ? "Monthly" : ""}
           </button>
 
-          <p className="mt-4 text-center text-sm text-trust-muted">
-            Kind Sisters is a registered charity. All donations over $2 are
-            tax deductible.
-          </p>
+          <div className="mt-4 flex items-center justify-center gap-2 text-sm text-trust-muted">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+            <span>Secure payment via Stripe. All donations over $2 are tax deductible.</span>
+          </div>
         </div>
       </section>
 
@@ -237,12 +229,16 @@ export default function DonatePage() {
                   src="/images/icons/containers-for-change-social.jpeg"
                   alt="Donate your 10c containers to Kind Sisters — Containers for Change ID C11083530"
                   className="rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] max-w-xs w-full hover:scale-105 transition-transform duration-300 cursor-pointer"
-                  onClick={() => {
+                  onClick={(e) => {
                     navigator.clipboard?.writeText('C11083530');
-                    alert('Scheme ID C11083530 copied to clipboard!');
+                    const el = e.currentTarget.parentElement?.querySelector('.copy-feedback');
+                    if (el) {
+                      el.textContent = 'Copied!';
+                      setTimeout(() => { el.textContent = 'Tap to copy Scheme ID'; }, 2000);
+                    }
                   }}
                 />
-                <p className="text-center text-trust-muted text-xs mt-3">Tap to copy Scheme ID</p>
+                <p className="copy-feedback text-center text-trust-muted text-xs mt-3">Tap to copy Scheme ID</p>
               </div>
             </div>
           </div>
@@ -327,6 +323,6 @@ export default function DonatePage() {
           </Link>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

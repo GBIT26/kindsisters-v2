@@ -3,6 +3,7 @@ import SectionReveal from '@/components/SectionReveal';
 import DonateButton from '@/components/DonateButton';
 import ImpactCounter from '@/components/ImpactCounter';
 import RotatingImpact from '@/components/RotatingImpact';
+import NewsletterForm from '@/components/NewsletterForm';
 
 export default function Home() {
   return (
@@ -262,20 +263,7 @@ export default function Home() {
           <SectionReveal>
             <h2 className="font-[var(--font-dm-serif)] text-3xl text-[var(--trust)] mb-3">Stay Connected</h2>
             <p className="text-[var(--trust-soft)] mb-8">Join our newsletter to hear about our impact and how you can help.</p>
-            <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Your email address"
-                required
-                className="flex-1 px-4 py-3 rounded-full border border-[var(--border-default)] bg-[var(--earth)] focus:border-[var(--kindness)] focus:outline-none focus:ring-2 focus:ring-[var(--kindness)]/20 transition-all text-sm"
-              />
-              <button
-                type="submit"
-                className="px-6 py-3 bg-[var(--kindness)] text-white rounded-full font-semibold hover:bg-[var(--kindness-deep)] transition-all text-sm"
-              >
-                Subscribe
-              </button>
-            </form>
+            <NewsletterForm />
           </SectionReveal>
         </div>
       </section>

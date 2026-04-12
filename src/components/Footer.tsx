@@ -52,9 +52,12 @@ export default function Footer() {
                 { href: '/', label: 'Home' },
                 { href: '/about', label: 'About' },
                 { href: '/projects', label: 'Projects' },
+                { href: '/events', label: 'Events' },
+                { href: '/get-involved', label: 'Get Involved' },
+                { href: '/stories', label: 'Stories' },
                 { href: '/contact', label: 'Contact' },
                 { href: '/donate', label: 'Donate' },
-                { href: '/testimonials', label: 'Stories of Hope' },
+                { href: '/privacy', label: 'Privacy Policy' },
               ].map((link) => (
                 <Link key={link.href} href={link.href} className="block text-sm text-white/70 hover:text-[var(--kindness-soft)] transition-colors">
                   {link.label}
