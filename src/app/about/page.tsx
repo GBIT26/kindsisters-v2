@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Image from "next/image";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Meet the team behind Kind Sisters — a grass-roots nonprofit supporting vulnerable women and children in Perth since 2015.",
+};
 
 const team = [
   {

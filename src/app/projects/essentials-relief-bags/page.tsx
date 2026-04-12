@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Essentials Relief Bags",
+  description:
+    "Food and hygiene essentials delivered to families in need through local schools in Perth — discreetly, respectfully, and with care.",
+};
 
 const nonPerishables = [
   "Rice and pasta",

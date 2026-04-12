@@ -41,15 +41,19 @@ export default function Header() {
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+          <div
+            className="flex items-center justify-between transition-all duration-500"
+            style={{ height: scrolled ? '5rem' : '16rem' }}
+          >
             {/* Logo */}
             <Link href="/" className="flex-shrink-0">
               <Image
                 src="/images/kind-sisters-logo.svg"
                 alt="Kind Sisters — Creating Space for Community"
-                width={180}
-                height={80}
-                className="h-14 w-auto"
+                width={720}
+                height={320}
+                className="w-auto transition-all duration-500"
+                style={{ height: scrolled ? '3.5rem' : '14rem' }}
                 priority
               />
             </Link>

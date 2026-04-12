@@ -1,4 +1,11 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Stories of Hope",
+  description:
+    "Real voices from families, volunteers, and donors whose lives have been touched by Kind Sisters in Perth.",
+};
 
 const testimonials = [
   {

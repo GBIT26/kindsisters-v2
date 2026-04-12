@@ -1,5 +1,12 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Women's Community Connect",
+  description:
+    "Safe, inclusive events bringing women together for connection, support, and access to essential services in Perth.",
+};
 
 const serviceAreas = [
   {
