@@ -1,7 +1,11 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!);
+function getStripe() {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) return null;
+  return new Stripe(key);
+}
 
 function checkOrigin(request: NextRequest): boolean {
   const origin = request.headers.get('origin');
@@ -15,6 +19,14 @@ function checkOrigin(request: NextRequest): boolean {
 }
 
 export async function POST(request: NextRequest) {
+  const stripe = getStripe();
+  if (!stripe) {
+    return NextResponse.json(
+      { error: 'Payments are not configured yet. Please try again later.' },
+      { status: 503 }
+    );
+  }
+
   if (!checkOrigin(request)) {
     return NextResponse.json({ error: 'Forbidden' }, { status: 403 });
   }
