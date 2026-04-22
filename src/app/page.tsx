@@ -223,7 +223,7 @@ export default function Home() {
                   {[
                     { name: 'City of Stirling', logo: '/images/partners/city-of-stirling-logo.svg', url: 'https://www.stirling.wa.gov.au' },
                     { name: 'GBIT Automation', logo: '/images/partners/gbit-logo.png', url: 'https://gbit.au' },
-                    { name: 'Sisters of Charity Inc', logo: '/images/partners/sisters-of-charity-logo.jpg', url: 'https://www.sistersofcharity.org.au' },
+                    { name: 'Sisters of Charity Inc', logo: '/images/partners/sisters-of-charity-logo.png', url: 'https://www.sistersofcharity.org.au', heightClass: 'h-24' },
                     { name: 'Street Smart Australia', logo: '/images/partners/street-smart-logo.jpg', url: 'https://streetsmartaustralia.org' },
                     { name: 'Relate Counselling', logo: '/images/partners/relate-counselling-logo.png', url: 'https://www.relatecounselling.com.au' },
                     { name: 'SJM Bookkeeping Pty Ltd', logo: null, url: null },
@@ -235,14 +235,14 @@ export default function Home() {
                       {sponsor.url ? (
                         <a href={sponsor.url} target="_blank" rel="noopener noreferrer" title={sponsor.name}>
                           {sponsor.logo ? (
-                            <img src={sponsor.logo} alt={sponsor.name} className="h-16 w-auto object-contain" />
+                            <img src={sponsor.logo} alt={sponsor.name} className={`${('heightClass' in sponsor && sponsor.heightClass) || 'h-16'} w-auto object-contain`} />
                           ) : (
                             <span className="text-black text-base font-semibold whitespace-nowrap hover:text-[var(--kindness)] transition-colors">{sponsor.name}</span>
                           )}
                         </a>
                       ) : (
                         sponsor.logo ? (
-                          <img src={sponsor.logo} alt={sponsor.name} className="h-16 w-auto object-contain" />
+                          <img src={sponsor.logo} alt={sponsor.name} className={`${('heightClass' in sponsor && sponsor.heightClass) || 'h-16'} w-auto object-contain`} />
                         ) : (
                           <span className="text-black text-base font-semibold whitespace-nowrap">{sponsor.name}</span>
                         )
