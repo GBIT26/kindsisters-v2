@@ -230,7 +230,7 @@ export default function Home() {
                     { name: 'Relate Counselling', logo: '/images/partners/relate-counselling-logo.png', url: 'https://www.relatecounselling.com.au' },
                     { name: 'SJM Bookkeeping Pty Ltd', logo: null, url: null },
                     { name: 'Inner Wheel Society Scarborough', logo: null, url: 'https://www.innerwheel.org.au' },
-                    { name: 'Mens Shed Wanneroo', logo: null, url: 'https://mensshed.org/shed/mens-shed-wanneroo' },
+                    { name: 'Mens Shed Wanneroo', logo: '/images/partners/mens-shed-wanneroo-logo.webp', url: 'https://mensshed.org/shed/mens-shed-wanneroo' },
                     { name: 'Sudbury Community House', logo: null, url: null },
                   ].map((sponsor) => (
                     <div key={`${setIndex}-${sponsor.name}`} className="flex-shrink-0">
