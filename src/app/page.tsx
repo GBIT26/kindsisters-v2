@@ -231,7 +231,7 @@ export default function Home() {
                     { name: 'SJM Bookkeeping Pty Ltd', logo: null, url: null },
                     { name: 'Inner Wheel Society Scarborough', logo: '/images/partners/inner-wheel-scarborough-logo.png', url: 'https://innerwheelaustralia.org.au/clubs-directory/scarborough/' },
                     { name: 'Mens Shed Wanneroo', logo: '/images/partners/mens-shed-wanneroo-logo.webp', url: 'https://mensshed.org/shed/mens-shed-wanneroo' },
-                    { name: 'Sudbury Community House', logo: null, url: null },
+                    { name: 'Sudbury Community House', logo: '/images/partners/sudbury-community-house-logo.png', url: 'https://www.sudburyhouse.org.au/' },
                   ].map((sponsor) => (
                     <div key={`${setIndex}-${sponsor.name}`} className="flex-shrink-0">
                       {sponsor.url ? (
