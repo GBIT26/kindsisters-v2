@@ -217,8 +217,6 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-black font-semibold text-sm tracking-wider uppercase mb-8 text-center">Our Supporters</p>
           <div className="relative">
-            <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[var(--earth)] to-transparent z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[var(--earth)] to-transparent z-10" />
             <div className="flex animate-scroll-x w-max">
               {[...Array(3)].map((_, setIndex) => (
                 <div key={setIndex} className="flex shrink-0 items-center gap-16 px-8" aria-hidden={setIndex > 0}>
