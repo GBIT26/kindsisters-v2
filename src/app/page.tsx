@@ -215,7 +215,7 @@ export default function Home() {
       {/* ===== SPONSORS CAROUSEL ===== */}
       <section className="py-12 bg-[var(--earth)] overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-[var(--trust-muted)] font-semibold text-sm tracking-wider uppercase mb-8 text-center">Our Supporters</p>
+          <p className="text-black font-semibold text-sm tracking-wider uppercase mb-8 text-center">Our Supporters</p>
           <div className="relative">
             <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-[var(--earth)] to-transparent z-10" />
             <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-[var(--earth)] to-transparent z-10" />
@@ -239,14 +239,14 @@ export default function Home() {
                           {sponsor.logo ? (
                             <img src={sponsor.logo} alt={sponsor.name} className="h-16 w-auto object-contain" />
                           ) : (
-                            <span className="text-[var(--trust-soft)] text-base font-semibold whitespace-nowrap hover:text-[var(--kindness)] transition-colors">{sponsor.name}</span>
+                            <span className="text-black text-base font-semibold whitespace-nowrap hover:text-[var(--kindness)] transition-colors">{sponsor.name}</span>
                           )}
                         </a>
                       ) : (
                         sponsor.logo ? (
                           <img src={sponsor.logo} alt={sponsor.name} className="h-16 w-auto object-contain" />
                         ) : (
-                          <span className="text-[var(--trust-soft)] text-base font-semibold whitespace-nowrap">{sponsor.name}</span>
+                          <span className="text-black text-base font-semibold whitespace-nowrap">{sponsor.name}</span>
                         )
                       )}
                     </div>
